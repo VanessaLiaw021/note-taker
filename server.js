@@ -43,7 +43,7 @@ app.post("/api/notes", (req, res) => {
         const parseNote = JSON.parse(data);
 
         //Destructuring assignment for the items in req.body 
-        const {title, text} = req.body;
+        const { title, text } = req.body;
 
         //If the title and text is present, then push the parseData to the object
         if (title && text) {
