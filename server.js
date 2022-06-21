@@ -19,7 +19,7 @@ app.use(express.json());
 app.get("/api/notes", (req, res) => {
 
     //Read the file from db.json 
-    fs.readFile("./db/db.json", "utf8", (err, data) => {
+    fs.readFileSync("./db/db.json", "utf8", (err, data) => {
 
         //If error exist, display the error 
         if (err) console.log(err);
@@ -34,7 +34,7 @@ app.get("/api/notes", (req, res) => {
 app.post("/api/notes", (req, res) => {
 
     //Read the file of the db.json
-    fs.readFile("./db/db.json", "utf8", (err, data) => {
+    fs.readFileSync("./db/db.json", "utf8", (err, data) => {
 
         //If error exist, display the error
         if (err) console.log(err);
@@ -71,6 +71,36 @@ app.post("/api/notes", (req, res) => {
             res.json(notes);
         });
     }); 
+});
+
+//DELETE request to delete the note based on the id (BOUNS)
+app.delete("./db/db.json", (req, res) => {
+
+    //Read the file 
+    fs.readFileSync("./db/db.json", (err, data) => {
+
+        //If error exist, display the error 
+        if (err) console.log(err);
+
+        //Convert string to object 
+        const note = JSON.parse(data);
+
+        //Get the id of the specific notes 
+        const deleteNote = req.params.id;
+
+        //Filter through the array of object, and if id matches it will remove it 
+        const loopNote = note.filter(notes => notes !== deleteNote);
+
+        //Write the file 
+        fs.writeFile("./db/db.json", JSON.stringify(loopNote), err => {
+
+            //If error exist, display the error 
+            if (err) console.log(err);
+
+            //Display message that specific notes has been deleted 
+            res.json("Successfully deleted notes");
+        });
+    });
 });
 
 //GET request for html route notes page 
