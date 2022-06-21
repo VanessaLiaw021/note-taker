@@ -1,8 +1,8 @@
 //Import required packages 
 const express = require("express");
 const fs = require("fs");
-const { uuid } = require("./helpers/uuid");
 const path = require("path");
+const { uuid } = require("./helpers/uuid");
 
 //Start the express server 
 const app = express();
@@ -34,7 +34,7 @@ app.get("/api/notes", (req, res) => {
 app.post("/api/notes", (req, res) => {
 
     //Read the file of the db.json
-    fs.readFile('./db/db.json', 'utf8', (err, data) => {
+    fs.readFile("./db/db.json", "utf8", (err, data) => {
 
         //If error exist, display the error
         if (err) console.log(err);
@@ -62,7 +62,7 @@ app.post("/api/notes", (req, res) => {
         const parseNoteAgain = JSON.stringify(parseNote);
 
         //Write the file
-        fs.writeFile('./db/db.json', parseNoteAgain, (err, data) => {
+        fs.writeFile("./db/db.json", parseNoteAgain, (err, data) => {
             
             //If error exist, display the error
             if (err) console.log(err);
