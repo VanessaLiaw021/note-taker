@@ -3,6 +3,7 @@ const express = require("express");
 const fs = require("fs");
 const uuid = require("./helpers/uuid");
 const path = require("path");
+const { parse } = require("path");
 
 //Start the express server 
 const app = express();
@@ -28,6 +29,50 @@ app.get("/api/notes", (req, res) => {
         res.json(JSON.parse(data));
 
     });
+});
+
+//POST request to post the title and text to the page
+app.post("/api/notes", (req, res) => {
+
+    //Read the file of the db.json
+    fs.readFile('./db/db.json', 'utf8', (err, data) => {
+
+        //If error exist, display the error
+        if (err) console.log(err);
+
+        //Convert string to object
+        const parseNote = JSON.parse(data);
+
+        //Destructuring assignment for the items in req.body 
+        const {title, text} = req.body;
+
+        //If the title and text is present, then push the parseData to the object
+        if (title && text) {
+
+            //Object to save the response
+            const newNote =  {
+                title, 
+                text, 
+                id: uuid()
+            };
+
+            //Push the data to the object
+            parseNote.push(newNote);
+        };
+
+        //Conver object to string to save it 
+        const parseNoteAgain = JSON.stringify(parseNote);
+
+        //Write the file
+        fs.writeFile('./db/db.json', parseNoteAgain, (err, data) => {
+            
+            //If error exist, display the error
+            if (err) console.log(err);
+
+            //Return the title and text as string
+            res.json(parseNoteAgain);
+        });
+    }); 
 });
 
 //GET request for html route notes page 
