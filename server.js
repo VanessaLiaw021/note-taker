@@ -1,9 +1,8 @@
 //Import required packages 
 const express = require("express");
 const fs = require("fs");
-const uuid = require("./helpers/uuid");
+const { uuid } = require("./helpers/uuid");
 const path = require("path");
-const { parse } = require("path");
 
 //Start the express server 
 const app = express();
@@ -51,9 +50,8 @@ app.post("/api/notes", (req, res) => {
 
             //Object to save the response
             const newNote =  {
-                title, 
-                text, 
-                id: uuid()
+                ...req.body,
+                id: uuid
             };
 
             //Push the data to the object
