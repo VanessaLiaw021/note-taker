@@ -62,7 +62,7 @@ app.post("/api/notes", (req, res) => {
         const parseNoteAgain = JSON.stringify(parseNote);
 
         //Write the file
-        fs.writeFile("./db/db.json", parseNoteAgain, (err, data) => {
+        fs.writeFile("./db/db.json", parseNoteAgain, (err) => {
             
             //If error exist, display the error
             if (err) console.log(err);
