@@ -40,7 +40,7 @@ app.post("/api/notes", (req, res) => {
         if (err) console.log(err);
 
         //Convert string to object
-        const parseNote = JSON.parse(data);
+        const note = JSON.parse(data);
 
         //Destructuring assignment for the items in req.body 
         const { title, text } = req.body;
@@ -55,20 +55,20 @@ app.post("/api/notes", (req, res) => {
             };
 
             //Push the data to the object
-            parseNote.push(newNote);
+            note.push(newNote);
         };
 
         //Conver object to string to save it 
-        const parseNoteAgain = JSON.stringify(parseNote);
+        const notes = JSON.stringify(note);
 
         //Write the file
-        fs.writeFile("./db/db.json", parseNoteAgain, (err) => {
+        fs.writeFile("./db/db.json", notes, (err) => {
             
             //If error exist, display the error
             if (err) console.log(err);
 
             //Return the title and text as string
-            res.json(parseNoteAgain);
+            res.json(notes);
         });
     }); 
 });
