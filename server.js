@@ -15,11 +15,26 @@ app.use(express.static('public'));
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
+//GET request to read all note in db.json and display it on the notes page 
+app.get("/api/notes", (req, res) => {
+
+    //Read the file from db.json 
+    fs.readFile("./db/db.json", "utf8", (err, data) => {
+
+        //If error exist, display the error 
+        if (err) console.log(err);
+
+        //Parsing the data to string and displaying it
+        res.json(JSON.parse(data));
+
+    });
+});
+
 //GET request for html route notes page 
 app.get("/notes", (req, res) => res.sendFile(path.join(__dirname, "public/notes.html")));
 
 //GET request for html route to home page 
-app.get("*", (req, res) => res.sendFile(path_join(__dirname, "public/index.html")));
+app.get("*", (req, res) => res.sendFile(path.join(__dirname, "public/index.html")));
 
 //Listening to the port number 
 app.listen(PORT, () => console.log(`Application listening to PORT http://localhost:${PORT}`));
