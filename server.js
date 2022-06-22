@@ -62,7 +62,7 @@ app.post("/api/notes", (req, res) => {
         const notes = JSON.stringify(note);
 
         //Write the file
-        fs.writeFile('./db/db.json', notes, (err, data) => {
+        fs.writeFile('./db/db.json', notes, err => {
             
             //If error exist, display the error
             if (err) console.log(err);
@@ -92,7 +92,7 @@ app.delete("/api/notes/:id", (req, res) => {
         const loopData = parseNote.filter(note => note.id !== deleteNote);
 
         //Write the file
-        fs.writeFile('./db/db.json', JSON.stringify(loopData), (err, data) => {
+        fs.writeFile('./db/db.json', JSON.stringify(loopData), err => {
 
              //If error exist, display the error
             if (err) console.log(err);
