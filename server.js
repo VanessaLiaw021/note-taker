@@ -110,4 +110,4 @@ app.get('/notes', (req, res) => res.sendFile(path.join(__dirname, 'public/notes.
 app.get('*', (req, res) => res.sendFile(path.join(__dirname, 'public/index.html')));  
 
 //Listening to the port server
-app.listen(PORT, () => console.log(`Listening on PORT: http://localhost:${PORT}`));
+app.listen(PORT, () => console.log(`Listening on PORT: ${PORT}`));
