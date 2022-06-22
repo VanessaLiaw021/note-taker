@@ -13,7 +13,7 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
 //Express server to read from public directory
-app.use(express.static('public'));
+app.use(express.static('public')); 
 
 //GET request for to read the db.json and display it all on the page
 app.get("/api/notes", (req, res) => {
@@ -107,7 +107,7 @@ app.delete("/api/notes/:id", (req, res) => {
 app.get('/notes', (req, res) => res.sendFile(path.join(__dirname, 'public/notes.html')));
 
 //GET request for html route to home page
-app.get('*', (req, res) => res.sendFile(path.join(__dirname, 'public/index.html')));  
+app.get('*', (req, res) => res.sendFile(path.join(__dirname, 'public/index.html'))); 
 
 //Listening to the port server
 app.listen(PORT, () => console.log(`Listening on PORT: ${PORT}`));
