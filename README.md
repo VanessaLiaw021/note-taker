@@ -32,9 +32,15 @@ How to use this note taking application
 
 This is the home page when you first open application 
 
+![Home Page](./images/home.png)
+
 This is the notes page when you click on the start button
 
+![Notes Page](./images/notes.png)
+
 This is where when the click on save, it it save to the left side of the note page
+
+![Save Page](./images/save.png)
 
 ## Resources
 
